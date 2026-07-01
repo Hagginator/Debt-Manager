@@ -18,9 +18,13 @@ function renderDebts() {
 
             <p>Minimum £${debt.minimum.toFixed(2)}</p>
 
-            <button onclick="deleteDebt(${index})">
-                Delete
-            </button>
+            <button onclick="editDebt(${index})">
+    Edit
+</button>
+
+<button onclick="deleteDebt(${index})">
+    Delete
+</button>
 
         </div>
 

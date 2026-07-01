@@ -1,5 +1,7 @@
 let debts = [];
 
+let editingIndex = null;
+
 function addDebt() {
 
 const lender = document.getElementById("lender").value;
@@ -16,7 +18,7 @@ const minimum = Number(document.getElementById("minimum").value);
 
     }
 
-    debts.push({
+    const debt = {
 
     lender,
 
@@ -28,16 +30,29 @@ const minimum = Number(document.getElementById("minimum").value);
 
     minimum
 
-});
+};
 
-    saveDebts();
-    
-    renderDebts();
+if (editingIndex === null) {
 
-    updateSummary();
+    debts.push(debt);
 
-    clearForm();
+} else {
 
+    debts[editingIndex] = debt;
+
+    editingIndex = null;
+
+    document.getElementById("addDebtButton").textContent = "Add Debt";
+
+}
+
+saveDebts();
+
+renderDebts();
+
+updateSummary();
+
+clearForm();
 }
 
 function deleteDebt(index) {
@@ -49,5 +64,20 @@ function deleteDebt(index) {
     updateSummary();
 
     saveDebts();
+
+}
+
+function editDebt(index) {
+
+    const debt = debts[index];
+
+    document.getElementById("lender").value = debt.lender;
+    document.getElementById("balance").value = debt.balance;
+    document.getElementById("apr").value = debt.apr;
+    document.getElementById("limit").value = debt.limit;
+    document.getElementById("minimum").value = debt.minimum;
+
+    editingIndex = index;
+    document.getElementById("addDebtButton").textContent = "Save Changes";
 
 }
